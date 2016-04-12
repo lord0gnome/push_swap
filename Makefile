@@ -6,7 +6,7 @@
 #    By: guiricha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 16:55:06 by guiricha          #+#    #+#              #
-#    Updated: 2016/04/12 16:23:57 by guiricha         ###   ########.fr        #
+#    Updated: 2016/04/12 16:39:36 by guiricha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,7 @@ $(NAME): $(LIB) $(OBJ_NAME)
 	@echo "  / /    / // __  / /_    / /   ";
 	@echo " / /____/ // /_/ / __/   / /    ";
 	@echo "/_____/___/_____/_/     /_/     ";
-	@make re -C libft && cp -f libft/libft.a ./
-	@make re -C printf && cp -f printf/libftprintf.a ./
-	@echo "                                \n\nMaking";
+	@echo "                                \nand\nMaking";
 	@echo "          _____                    _____                    _____                    _____                _____                    _____          ";
 	@echo "         /\    \                  /\    \                  /\    \                  /\    \              /\    \                  /\    \         ";
 	@echo "        /::\    \                /::\    \                /::\    \                /::\____\            /::\    \                /::\    \        ";
@@ -53,6 +51,9 @@ $(NAME): $(LIB) $(OBJ_NAME)
 	@echo "                                 \:|   |                  \::/    /                \::/    /                                                      ";
 	@echo "                                  \|___|                   \/____/                  \/____/                                                       ";
 	@echo "                                                                                                                                                  ";
+	@make re -C libft && cp -f libft/libft.a ./
+	@make re -C printf && cp -f printf/libftprintf.a ./
+	@echo "Making final $(NAME)"
 	@$(CC) -o $(NAME) $(OBJ_NAME) $(STCS) $(FRAMEWORKS)
 
 $(OBJ_NAME):

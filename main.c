@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/14 14:42:11 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/14 16:09:55 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,23 @@ int		main(int argc, char **argv)
 		ft_putchar('\n');
 	}
 	//SORT IN HERE
-/*	while ((!(is_sorted_final(&a, b.currentsize))))	
+	while ((!(is_sorted_final(&a, b.currentsize))))	
 	{
-		if (a->stack[a->currentsize - 1] < a->stack[0])
+		if (a.stack[a.currentsize - 1] < a.stack[0])
 			ra(&a);
-		if (a->stack[a->currentsize - 1] > a->stack[0])
+		if (a.stack[a.currentsize - 1] > a.stack[0])
 			rra(&a);
-
 	}
 
+	/*sa(&a);
+	pb(&a, &b);
+	pb(&a, &b);
+	pb(&a, &b);
+	sa(&a);
+	pa(&a, &b);
+	pa(&a, &b);
+	pa(&a, &b);
 */
-	sa(&a);
-	pb(&a, &b);
-	pb(&a, &b);
-	pb(&a, &b);
-	sa(&a);
-	pa(&a, &b);
-	pa(&a, &b);
-	pa(&a, &b);
 	//STOP HERE
 	i = a.currentsize;
 	j = b.currentsize;

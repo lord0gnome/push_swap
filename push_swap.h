@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/14 14:03:03 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/14 15:39:34 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_stack
 }				t_stack;
 
 int		is_sorted_final(t_stack *a, int bsize);
+int		cmp(int top, int bottom);
 int		sa(t_stack *a);
 int		sb(t_stack *b);
 void	ss(t_stack *a, t_stack *b);

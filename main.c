@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/14 16:09:55 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/15 15:02:58 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,80 +14,80 @@
 
 int		main(int argc, char **argv)
 {
-	t_stack	a;
-	t_stack b;
-	int	i;
-	int j;
+	t_s		*a;
+	t_s 	*b;
 	long long test;
 
-	i = 0;
-	if (argc > 1)
-	{
-		a.stack = (int *)malloc(sizeof(int) * argc - 1);
-		b.stack = (int *)malloc(sizeof(int) * argc - 1);
-	}
+	b = NULL;
+	if (argc > 1 && ((test = ft_atoll(argv[argc - 1])) <= 2147483647 &&
+				test >= -2147483648))
+		a = create_list(ft_atoi(argv[argc-- - 1]));
 	else
-		return (0);
+		return (-1);
 	while (argc > 1)
 	{
 		test = ft_atoll(argv[argc - 1]);
 		if (test > 2147483647 || test < -2147483648)
 			return (0);
-		a.stack[i] = ft_atoi(argv[argc - 1]);
-		i++;
+		a = add_to_start(ft_atoi(argv[argc - 1]), a);
 		argc--;
 	}
-	a.currentsize = i;
-	ft_printf("\n%d\n", a.currentsize);
-	b.currentsize = 0;
-	i = 0;
-	ft_putstr("stack A:	Stack B:\n");
-	ft_putstr("BEFOREsort:	BEFOREsort:\n");
-	i = a.currentsize;
-	j = b.currentsize;
-	while (i-- >= 0 || j > 0)
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = pb(a, &b);
+	a = ra(a);
+	a = ra(a);
+	a = ra(a);
+	a = ra(a);
+	a = ra(a);
+	a = ra(a);
+	a = sa(a);
+	a = ra(a);
+	a = ra(a);
+	a = ra(a);
+	a = sa(a);
+	a = ra(a);
+	a = ra(a);
+	a = ra(a);
+	ft_putstr("\n\nstack A\n");
+	ft_putstr("BEFOREsort:\n");
+	while ((a))
 	{
-		if (i >= 0)
-			ft_putnbr(a.stack[i]);
-		ft_putstr("			");
-		if (j-- > 0)
-			ft_putnbr(b.stack[j]);
+		ft_putnbr(a->val);
+		if (a->start)
+			ft_putstr("_is_start");
+		if (a->end)
+		{
+			ft_putstr("_is_end");
+			break;
+		}
+		a = a->n;
+		ft_putchar('\n');
+	}
+	ft_putstr("\n\nstack B\n");
+	ft_putstr("BEFOREsort:\n");
+	while ((b))
+	{
+		ft_putnbr(b->val);
+		if (b->start)
+			ft_putstr("_is_start");
+		if (b->end)
+		{
+			ft_putstr("_is_end");
+			break;
+		}
+		b = b->n;
 		ft_putchar('\n');
 	}
 	//SORT IN HERE
-	while ((!(is_sorted_final(&a, b.currentsize))))	
-	{
-		if (a.stack[a.currentsize - 1] < a.stack[0])
-			ra(&a);
-		if (a.stack[a.currentsize - 1] > a.stack[0])
-			rra(&a);
-	}
-
-	/*sa(&a);
-	pb(&a, &b);
-	pb(&a, &b);
-	pb(&a, &b);
-	sa(&a);
-	pa(&a, &b);
-	pa(&a, &b);
-	pa(&a, &b);
-*/
 	//STOP HERE
-	i = a.currentsize;
-	j = b.currentsize;
-	ft_putstr("stack A		Stack B\n");
-	ft_putstr("AFTERsort:	AFTERsort:\n");
-	while (i-- >= 0 || j > 0)
-	{
-		if (i >= 0)
-			ft_putnbr(a.stack[i]);
-		ft_putstr("			");
-		if (j-- > 0)
-			ft_putnbr(b.stack[j]);
-		ft_putchar('\n');
-	}
-
-	if ((is_sorted_final(&a, b.currentsize)) == 1)
-		ft_printf("\n\nSUCCESS!!!!!!\n");
+	//if ((is_sorted_final(&a, b.currentsize)) == 1)
+	ft_printf("\n\nSUCCESS!!!!!!\n");
 	return (0);
 }

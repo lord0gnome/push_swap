@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/14 15:39:34 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/15 14:18:39 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,23 @@
 # include "printf/ft_printf.h"
 # include "libft/libft.h"
 
-typedef struct	s_stack
+typedef struct	s_s
 {
-	int			*stack;
-	int			topindex;
-	int			bottomindex;
-	int			currentsize;
-}				t_stack;
+	int			val;
+	struct s_s	*p;
+	struct s_s	*n;
+	char		start;
+	char		end;
+}				t_s;
 
-int		is_sorted_final(t_stack *a, int bsize);
-int		cmp(int top, int bottom);
-int		sa(t_stack *a);
-int		sb(t_stack *b);
-void	ss(t_stack *a, t_stack *b);
-int		pa(t_stack *a, t_stack *b);
-int		pb(t_stack *a, t_stack *b);
-int		ra(t_stack *a);
-int		rb(t_stack *b);
-void	rr(t_stack *a, t_stack *b);
-int		rra(t_stack *a);
-int		rrb(t_stack *b);
-void	rrr(t_stack *a, t_stack *b);
+
+
+t_s	*add_to_start(int value, t_s *begin);
+t_s	*create_list(int first);
+t_s	*sa(t_s *a);
+t_s	*ra(t_s *a);
+t_s	*pb(t_s *a, t_s **b);
+t_s	*pa(t_s **a, t_s *b);
+t_s *destroy(t_s *todestroy);
 
 #endif

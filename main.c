@@ -6,11 +6,12 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/15 15:02:58 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/16 13:09:08 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <unistd.h>
 
 int		main(int argc, char **argv)
 {
@@ -32,34 +33,44 @@ int		main(int argc, char **argv)
 		a = add_to_start(ft_atoi(argv[argc - 1]), a);
 		argc--;
 	}
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = pb(a, &b);
-	a = ra(a);
-	a = ra(a);
-	a = ra(a);
-	a = ra(a);
-	a = ra(a);
-	a = ra(a);
-	a = sa(a);
-	a = ra(a);
-	a = ra(a);
-	a = ra(a);
-	a = sa(a);
-	a = ra(a);
-	a = ra(a);
-	a = ra(a);
-	ft_putstr("\n\nstack A\n");
+
+	system("clear");
+	//SORT IN HERE
+/*	while (a)
+	{
+		ft_wait(9999999);
+		while (a && a->n && is_smaller(a->n, a) && (!a->end || !a->start))
+		{
+			a->looped = 1;
+			a = sa(a);
+			ft_printf("swap %d and %d\n", a->val, a->n->val);
+		}
+		while (a && ((is_smaller(a, a->n)) || (a && a->end && a->start)))
+		{
+		ft_wait(9999999);
+			a->looped = 1;
+			ft_printf("push %d to b\n", a->val);
+			a = pb(a, &b);
+		}
+		if (a && a->looped == 1)
+			break ;
+	}
+	ft_putstr("\n\n\n\n\n");
+	while (b)
+	{
+		ft_wait(9999999);
+			ft_printf("push %d to a\n", b->val);
+			b = pa(&a, b);
+	}*/
+	a = rra(a);
+	//STOP HERE
+	ft_wait(199999999);
+	ft_putstr("stack A\n");
 	ft_putstr("BEFOREsort:\n");
 	while ((a))
 	{
 		ft_putnbr(a->val);
+		ft_wait(9999999);
 		if (a->start)
 			ft_putstr("_is_start");
 		if (a->end)
@@ -85,8 +96,6 @@ int		main(int argc, char **argv)
 		b = b->n;
 		ft_putchar('\n');
 	}
-	//SORT IN HERE
-	//STOP HERE
 	//if ((is_sorted_final(&a, b.currentsize)) == 1)
 	ft_printf("\n\nSUCCESS!!!!!!\n");
 	return (0);

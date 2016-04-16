@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 10:52:06 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/15 15:03:44 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/16 13:13:25 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_s	*create_list(int first)
 	new->p = new;
 	new->start = 1;
 	new->end = 1;
+	new->looped = 0;
 	new->val = first;
 	return (new);
 }
@@ -39,6 +40,7 @@ t_s	*add_to_start(int value, t_s *begin)
 		new->p = begin->p;
 		new->start = 1;
 		new->end = 0;
+		new->looped = 0;
 		if (begin->end)
 			begin->n = new;
 		else
@@ -63,6 +65,20 @@ t_s	*sa(t_s *a)
 	}
 	return (a);
 }
+
+t_s	*sb(t_s *b)
+{
+	int	tmp;
+
+	if (b && b->n)
+	{
+		tmp = b->val;
+		b->val = b->n->val;
+		b->n->val = tmp;
+	}
+	return (b);
+}
+
 
 t_s *pb(t_s *a, t_s **b)
 {
@@ -109,6 +125,28 @@ t_s	*ra(t_s *a)
 			a->p->end = 0;
 			a->end = 1;
 			return (a->n);
+		}
+		return (a);
+	}
+	else
+		return (a);
+}
+
+t_s	*rra(t_s *a)
+{
+	if (a && a->end && a->start)
+	{
+		return (a);
+	}
+	if (a)
+	{
+		if (a->p)
+		{
+			a->start = 0;
+			a->p->start = 1;
+			a->end = 1;
+			a->p->end = 0;
+			return (a->p);
 		}
 		return (a);
 	}

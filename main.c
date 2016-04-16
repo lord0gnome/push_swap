@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/16 13:09:08 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/16 19:19:30 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int		main(int argc, char **argv)
 {
 	t_s		*a;
 	t_s 	*b;
+	int		sml;
 	long long test;
+	int n;
+	int y;
 
 	b = NULL;
 	if (argc > 1 && ((test = ft_atoll(argv[argc - 1])) <= 2147483647 &&
@@ -35,67 +38,60 @@ int		main(int argc, char **argv)
 	}
 
 	system("clear");
-	//SORT IN HERE
-/*	while (a)
+	y = test_doubles(a);
+	sml = get_smallest(a);
+	a = pb(a, &b);
+	a = ra(a);
+/*	while (42)
 	{
-		ft_wait(9999999);
-		while (a && a->n && is_smaller(a->n, a) && (!a->end || !a->start))
+		while (a && a->val != sml)
 		{
-			a->looped = 1;
-			a = sa(a);
-			ft_printf("swap %d and %d\n", a->val, a->n->val);
+			system("clear");
+			print_lists(a, b);
+			ft_wait(55000000);
+			a = ra(a);
 		}
-		while (a && ((is_smaller(a, a->n)) || (a && a->end && a->start)))
-		{
-		ft_wait(9999999);
-			a->looped = 1;
-			ft_printf("push %d to b\n", a->val);
+		if (!a)
+			break;
 			a = pb(a, &b);
-		}
-		if (a && a->looped == 1)
-			break ;
-	}
-	ft_putstr("\n\n\n\n\n");
-	while (b)
-	{
-		ft_wait(9999999);
-			ft_printf("push %d to a\n", b->val);
-			b = pa(&a, b);
+			system("clear");
+			print_lists(a, b);
+			ft_wait(55000000);
 	}*/
-	a = rra(a);
+	n = 0;
+	//n = (is_pseudo_ordered(a));
+	//SORT IN HERE
+	//ft_printf("ordered but not aligned?%d", n);
+/*	if (n < 0)
+		while (n++ != 0)
+		{
+			system("clear");
+			print_lists(a, b);
+			ft_wait(55000000);
+			a = rra(a);
+		}
+	else
+		while (n-- != 0)
+		{
+			system("clear");
+			print_lists(a, b);
+			ft_wait(55000000);
+			a = ra(a);
+		}*/
+	system("clear");
+	print_lists(a, b);
+	ft_printf("value of doubles test(%d)\n", y);
 	//STOP HERE
-	ft_wait(199999999);
-	ft_putstr("stack A\n");
-	ft_putstr("BEFOREsort:\n");
-	while ((a))
-	{
-		ft_putnbr(a->val);
-		ft_wait(9999999);
-		if (a->start)
-			ft_putstr("_is_start");
-		if (a->end)
-		{
-			ft_putstr("_is_end");
-			break;
-		}
-		a = a->n;
-		ft_putchar('\n');
-	}
-	ft_putstr("\n\nstack B\n");
-	ft_putstr("BEFOREsort:\n");
-	while ((b))
-	{
-		ft_putnbr(b->val);
-		if (b->start)
-			ft_putstr("_is_start");
-		if (b->end)
-		{
-			ft_putstr("_is_end");
-			break;
-		}
-		b = b->n;
-		ft_putchar('\n');
-	}
+
+
+
+
+
+
+
+
+
+
 	//if ((is_sorted_final(&a, b.currentsize)) == 1)
 	ft_printf("\n\nSUCCESS!!!!!!\n");
 	return (0);

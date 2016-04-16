@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 10:52:06 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/16 13:13:25 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/16 19:19:34 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,29 @@ t_s	*ra(t_s *a)
 		return (a);
 }
 
+t_s	*rb(t_s *b)
+{
+	if (b && b->end && b->start)
+	{
+		return (b);
+	}
+	if (b)
+	{
+		if (b->n)
+		{
+			b->start = 0;
+			b->n->start = 1;
+			b->p->end = 0;
+			b->end = 1;
+			return (b->n);
+		}
+		return (b);
+	}
+	else
+		return (b);
+}
+
+
 t_s	*rra(t_s *a)
 {
 	if (a && a->end && a->start)
@@ -144,8 +167,8 @@ t_s	*rra(t_s *a)
 		{
 			a->start = 0;
 			a->p->start = 1;
-			a->end = 1;
 			a->p->end = 0;
+			a->p->p->end = 1;
 			return (a->p);
 		}
 		return (a);

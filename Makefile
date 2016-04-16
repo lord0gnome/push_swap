@@ -6,11 +6,11 @@
 #    By: guiricha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 16:55:06 by guiricha          #+#    #+#              #
-#    Updated: 2016/04/16 11:36:07 by guiricha         ###   ########.fr        #
+#    Updated: 2016/04/16 17:05:36 by guiricha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = main.c linked_lists.c test_funcs.c
+SRC_NAME = main.c linked_lists.c test_funcs.c print_lists.c
 NAME = push_swap
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall

@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 10:52:06 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/16 19:19:34 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/17 11:27:50 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ t_s *pb(t_s *a, t_s **b)
 	if (a && *b == NULL)
 	{
 		*b = create_list(a->val);
-		a = destroy(a);
+		a = destroy(&a);
 	}
 	else if (a && b)
 	{
 		*b = add_to_start(a->val, *b);
-		a = destroy(a);
+		a = destroy(&a);
 	}
 	return (a);
 }
@@ -100,12 +100,12 @@ t_s *pa(t_s **a, t_s *b)
 	if (b && *a == NULL)
 	{
 		*a = create_list(b->val);
-		b = destroy(b);
+		b = destroy(&b);
 	}
 	else if (*a && b)
 	{
 		*a = add_to_start(b->val, *a);
-		b = destroy(b);
+		b = destroy(&b);
 	}
 	return (b);
 }
@@ -177,26 +177,24 @@ t_s	*rra(t_s *a)
 		return (a);
 }
 
-t_s *destroy(t_s *todestroy)
+t_s *destroy(t_s **todestroy)
 {
-	t_s *sbck;
+	t_s	*tmp;
 
-	sbck = todestroy;
-	if (todestroy)
+	tmp = (*todestroy)->n;
+	if ((*todestroy) && (*todestroy)->start && (*todestroy)->end)
 	{
-		if (!todestroy->end)
-		{
-			todestroy = todestroy->n;
-			if (todestroy->p->start)
-				todestroy->p = todestroy->p->p;
-			free(sbck);
-			todestroy->start = 1;
-		}
-		else
-		{
-			free(todestroy);
-			todestroy = NULL;
-		}
+		free(*todestroy);
+		*todestroy = NULL;
+		return (*todestroy);
 	}
-	return (todestroy);
+	else if ((*todestroy) && (*todestroy)->start)
+	{
+		(*todestroy)->n->start = 1;
+		(*todestroy)->n->p = (*todestroy)->p;
+		(*todestroy)->p->n = (*todestroy)->n;
+		free(*todestroy);
+		return (tmp);
+	}
+return (*todestroy);
 }

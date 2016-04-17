@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/16 19:19:30 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/17 16:47:42 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ int		main(int argc, char **argv)
 	t_s		*a;
 	t_s 	*b;
 	int		sml;
+	int		dir;
 	long long test;
 	int n;
 	int y;
+	double time;
+
 
 	b = NULL;
 	if (argc > 1 && ((test = ft_atoll(argv[argc - 1])) <= 2147483647 &&
@@ -37,62 +40,81 @@ int		main(int argc, char **argv)
 		argc--;
 	}
 
-	system("clear");
+	time = 0.8;
+	ft_putstr("\033[H\033[2J");
 	y = test_doubles(a);
-	sml = get_smallest(a);
-	a = pb(a, &b);
-	a = ra(a);
-/*	while (42)
+	if (y != 1)
+		return (0);
+	while (42)
 	{
-		while (a && a->val != sml)
+		if ((n = (is_pseudo_ordered(a))) != 0 && !b)
 		{
-			system("clear");
-			print_lists(a, b);
-			ft_wait(55000000);
+			if (n < 0)
+				while (n++ != 0)
+				{
+					print_lists(a, b, time);
+					a = rra(a);
+				}
+			else
+				while (n-- != 0)
+				{
+					print_lists(a, b, time);
+					a = ra(a);
+				}	
+			print_lists(a, b, time);
 			a = ra(a);
+
+			break ;
 		}
+		sml = get_smallest(a, &dir);
+		if (dir < 0)
+		{
+			while (a && a->val != sml)
+			{
+				print_lists(a, b, time);
+				a = rra(a);
+			}
+		}
+		else if (dir > 0)
+		{
+			while (a && a->val != sml)
+			{
+				print_lists(a, b, time);
+				a = ra(a);
+			}
+		}
+		print_lists(a, b, time);
+		if (a->val == sml)
+			a = pb(a, &b);
 		if (!a)
 			break;
-			a = pb(a, &b);
-			system("clear");
-			print_lists(a, b);
-			ft_wait(55000000);
-	}*/
-	n = 0;
-	//n = (is_pseudo_ordered(a));
-	//SORT IN HERE
-	//ft_printf("ordered but not aligned?%d", n);
-/*	if (n < 0)
+	}
+	while (b)
+	{
+		b = pa(&a, b);
+		print_lists(a, b, time);
+	}
+
+/*	n = (is_pseudo_ordered(a));
+	ft_printf("ordered but not aligned?%d", n);
+	if (n < 0)
 		while (n++ != 0)
 		{
-			system("clear");
+			ft_putstr("\033[H\033[2J");
 			print_lists(a, b);
-			ft_wait(55000000);
+			ft_wait(555);
 			a = rra(a);
 		}
 	else
 		while (n-- != 0)
 		{
-			system("clear");
+			ft_putstr("\033[H\033[2J");
 			print_lists(a, b);
-			ft_wait(55000000);
+			ft_wait(555);
 			a = ra(a);
 		}*/
-	system("clear");
-	print_lists(a, b);
-	ft_printf("value of doubles test(%d)\n", y);
 	//STOP HERE
 
-
-
-
-
-
-
-
-
-
 	//if ((is_sorted_final(&a, b.currentsize)) == 1)
-	ft_printf("\n\nSUCCESS!!!!!!\n");
 	return (0);
 }

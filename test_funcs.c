@@ -6,20 +6,21 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/16 19:15:17 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/17 14:27:39 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_smallest(t_s *start)
+int	get_smallest(t_s *start, int *dir)
 {
 	t_s	*tmp;
 	int	smallest;
 	int	tmpval;
 
+	*dir = 0;
 	tmp = start;
-	if (tmp && tmp->val)
+	if (tmp)
 		tmpval = tmp->val;
 	smallest = tmp->val;
 	tmp = tmp->n;
@@ -29,6 +30,13 @@ int	get_smallest(t_s *start)
 			smallest = tmp->val;
 		tmp = tmp->n;
 	}
+	tmp = start;
+	while (tmp && tmp->val != smallest)
+	{
+		tmp = tmp->n;
+		*dir += 1;
+	}
+	*dir = l(start) - *dir > *dir ? *dir : -(ft_abs(l(start) - *dir));
 	return (smallest);
 }
 
@@ -42,7 +50,6 @@ int	test_doubles(t_s *list)
 
 	ret = 1;
 	totallen = l(list);
-	ft_printf("totallen(%d)", totallen);
 	tlbck = totallen;
 	current = list->val;
 	next = list;

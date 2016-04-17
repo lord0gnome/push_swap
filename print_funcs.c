@@ -6,16 +6,11 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 17:01:35 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/17 16:47:46 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/17 16:53:31 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	print_rra(t_s *a, t_s *b, double time)
-{
-
-}
 
 void	print_lists(t_s *a, t_s *b, double time)
 {

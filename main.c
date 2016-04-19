@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/17 16:47:42 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/19 14:11:40 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int		main(int argc, char **argv)
 	long long test;
 	int n;
 	int y;
+	int nops;
 	double time;
+	char *string;
 
 
 	b = NULL;
@@ -39,10 +41,10 @@ int		main(int argc, char **argv)
 		a = add_to_start(ft_atoi(argv[argc - 1]), a);
 		argc--;
 	}
-
-	time = 0.8;
-	ft_putstr("\033[H\033[2J");
+nops = 0;
+	time = 0;
 	y = test_doubles(a);
+	string = "\n";
 	if (y != 1)
 		return (0);
 	while (42)
@@ -52,17 +54,19 @@ int		main(int argc, char **argv)
 			if (n < 0)
 				while (n++ != 0)
 				{
-					print_lists(a, b, time);
+		//			print_lists(a, b, time, string);
 					a = rra(a);
+					nops++;
 				}
 			else
 				while (n-- != 0)
 				{
-					print_lists(a, b, time);
+		//			print_lists(a, b, time, string);
 					a = ra(a);
+					nops++;
 				}	
-			print_lists(a, b, time);
-			a = ra(a);
+		//	print_lists(a, b, time, string);
+			//a = ra(a);
 
 			break ;
 		}
@@ -71,47 +75,56 @@ int		main(int argc, char **argv)
 		{
 			while (a && a->val != sml)
 			{
-				print_lists(a, b, time);
+		//		print_lists(a, b, time, string);
 				a = rra(a);
+					nops++;
 			}
 		}
 		else if (dir > 0)
 		{
 			while (a && a->val != sml)
 			{
-				print_lists(a, b, time);
+		//		print_lists(a, b, time, string);
 				a = ra(a);
+					nops++;
 			}
 		}
-		print_lists(a, b, time);
-		if (a->val == sml)
+		//print_lists(a, b, time, string);
+		if (a->val == sml && !is_ordered(a))
+		{
 			a = pb(a, &b);
-		if (!a)
+					nops++;
+		//	print_lists(a, b, time, string);
+		}
+		if (!a || is_ordered(a))
 			break;
 	}
 	while (b)
 	{
 		b = pa(&a, b);
-		print_lists(a, b, time);
+					nops++;
+		//print_lists(a, b, time, string);
 	}
 
-/*	n = (is_pseudo_ordered(a));
-	ft_printf("ordered but not aligned?%d", n);
-	if (n < 0)
+		print_lists(a, b, time, string);
+		ft_printf("\n\nnumber of operations : %d\n\n", nops);
+	/*	n = (is_pseudo_ordered(a));
+		ft_printf("ordered but not aligned?%d", n);
+		if (n < 0)
 		while (n++ != 0)
 		{
-			ft_putstr("\033[H\033[2J");
-			print_lists(a, b);
-			ft_wait(555);
-			a = rra(a);
+		ft_putstr("\033[H\033[2J");
+		print_lists(a, b);
+		ft_wait(555);
+		a = rra(a);
 		}
-	else
+		else
 		while (n-- != 0)
 		{
-			ft_putstr("\033[H\033[2J");
-			print_lists(a, b);
-			ft_wait(555);
-			a = ra(a);
+		ft_putstr("\033[H\033[2J");
+		print_lists(a, b);
+		ft_wait(555);
+		a = ra(a);
 		}*/
 	//STOP HERE
 

@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/17 14:27:39 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/19 12:46:17 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,27 @@ int	is_pseudo_ordered(t_s *list)
 	return (ret);
 }
 
+int	is_ordered(t_s *list)
+{
+	int	tmpval;
+	t_s	*tmp;
+
+	tmp = list;
+	tmpval = tmp->val;
+	if (tmp && !tmp->end)
+	{
+		while ((tmp->val) <= tmp->n->val)
+		{
+			tmp = tmp->n;
+		}
+			if (tmp->end)
+			{
+				return (1);
+			}
+	}
+	return (0);
+
+}
 int	l(t_s *s)
 {
 	int		count;

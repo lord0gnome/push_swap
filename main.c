@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/19 14:11:40 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:14:38 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int		main(int argc, char **argv)
 		a = add_to_start(ft_atoi(argv[argc - 1]), a);
 		argc--;
 	}
-nops = 0;
-	time = 0;
+	nops = 0;
+	time = 1;
 	y = test_doubles(a);
 	string = "\n";
 	if (y != 1)
@@ -54,18 +54,18 @@ nops = 0;
 			if (n < 0)
 				while (n++ != 0)
 				{
-		//			print_lists(a, b, time, string);
+					print_lists(a, b, time, string);
 					a = rra(a);
 					nops++;
 				}
 			else
 				while (n-- != 0)
 				{
-		//			print_lists(a, b, time, string);
+					print_lists(a, b, time, string);
 					a = ra(a);
 					nops++;
 				}	
-		//	print_lists(a, b, time, string);
+			print_lists(a, b, time, string);
 			//a = ra(a);
 
 			break ;
@@ -75,26 +75,26 @@ nops = 0;
 		{
 			while (a && a->val != sml)
 			{
-		//		print_lists(a, b, time, string);
+				print_lists(a, b, time, string);
 				a = rra(a);
-					nops++;
+				nops++;
 			}
 		}
 		else if (dir > 0)
 		{
 			while (a && a->val != sml)
 			{
-		//		print_lists(a, b, time, string);
+				print_lists(a, b, time, string);
 				a = ra(a);
-					nops++;
+				nops++;
 			}
 		}
-		//print_lists(a, b, time, string);
+		print_lists(a, b, time, string);
 		if (a->val == sml && !is_ordered(a))
 		{
 			a = pb(a, &b);
-					nops++;
-		//	print_lists(a, b, time, string);
+			nops++;
+			print_lists(a, b, time, string);
 		}
 		if (!a || is_ordered(a))
 			break;
@@ -102,12 +102,12 @@ nops = 0;
 	while (b)
 	{
 		b = pa(&a, b);
-					nops++;
-		//print_lists(a, b, time, string);
+		nops++;
+		print_lists(a, b, time, string);
 	}
 
-		print_lists(a, b, time, string);
-		ft_printf("\n\nnumber of operations : %d\n\n", nops);
+	print_lists(a, b, time, string);
+	ft_printf("\n\nnumber of operations : %d\n\n", nops);
 	/*	n = (is_pseudo_ordered(a));
 		ft_printf("ordered but not aligned?%d", n);
 		if (n < 0)

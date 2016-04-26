@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/19 12:46:17 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/26 15:23:30 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,64 @@ int	get_smallest(t_s *start, int *dir)
 	}
 	*dir = l(start) - *dir > *dir ? *dir : -(ft_abs(l(start) - *dir));
 	return (smallest);
+}
+
+int	get_biggest(t_s *start, int *dir)
+{
+	t_s	*tmp;
+	int	biggest;
+	int	tmpval;
+
+	*dir = 0;
+	tmp = start;
+	if (tmp)
+		tmpval = tmp->val;
+	biggest = tmp->val;
+	tmp = tmp->n;
+	while (tmp && !tmp->start)
+	{
+		if (tmp->val > biggest)
+			biggest = tmp->val;
+		tmp = tmp->n;
+	}
+	tmp = start;
+	while (tmp && tmp->val != biggest)
+	{
+		tmp = tmp->n;
+		*dir += 1;
+	}
+	*dir = l(start) - *dir > *dir ? *dir : -(ft_abs(l(start) - *dir));
+	return (biggest);
+}
+
+int	get_greater_than_median(t_s *start, int median, int *dir)
+{
+	t_s	*tmp;
+	int	biggest;
+	int	tmpval;
+
+	*dir = 0;
+	tmp = start;
+	if (tmp)
+		tmpval = tmp->val;
+	biggest = tmp->val;
+	tmp = tmp->n;
+	while (tmp && !tmp->start)
+	{
+		if (tmp->val > median)
+		{
+			biggest = tmp->val;
+		}
+		tmp = tmp->n;
+	}
+	tmp = start;
+	while (tmp && tmp->val != biggest)
+	{
+		tmp = tmp->n;
+		*dir += 1;
+	}
+	*dir = l(start) - *dir > *dir ? *dir : -(ft_abs(l(start) - *dir));
+	return (biggest);
 }
 
 int	test_doubles(t_s *list)
@@ -126,6 +184,7 @@ int	is_ordered(t_s *list)
 	return (0);
 
 }
+
 int	l(t_s *s)
 {
 	int		count;

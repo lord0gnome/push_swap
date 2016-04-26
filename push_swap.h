@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/19 14:30:31 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/26 15:23:37 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,16 @@ typedef struct	s_s
 	char		looped;
 }				t_s;
 
-/*typedef struct	s_action
+typedef struct		s_action
 {
-	int			action; // 1 == pb, 2 == pa, 3 == ra, 4 == rra, 5 == rb, 6 == rrb 7 == sa, 8 == sb
-	s_action	*
+	int				action; // 1 == pb, 2 == pa, 3 == ra, 4 == rra, 5 == rb, 6 == rrb 7 == sa, 8 == sb
+	struct s_action	*next;
+}					t_action;
 
-
-}				t_action;
-*/
 
 t_s	*add_to_start(int value, t_s *begin);
 int	get_smallest(t_s *start, int *dir);
+int	get_biggest(t_s *start, int *dir);
 int	is_pseudo_ordered(t_s *list);
 int	is_ordered(t_s *list);
 int	l(t_s *s); //length of stack
@@ -61,5 +60,6 @@ t_s	*pb(t_s *a, t_s **b);
 t_s	*pa(t_s **a, t_s *b);
 t_s *destroy(t_s **todestroy);
 void	print_lists(t_s *a, t_s *b, double time, char *string);
+int		get_median(int *tab, unsigned int tab_len);
 
 #endif

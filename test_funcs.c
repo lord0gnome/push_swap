@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/26 15:23:30 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/26 16:35:14 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,26 @@ int	get_biggest(t_s *start, int *dir)
 	return (biggest);
 }
 
-int	get_greater_than_median(t_s *start, int median, int *dir)
+int	get_greater_than_median(t_s *start, int median)
 {
-	t_s	*tmp;
-	int	biggest;
-	int	tmpval;
+	t_s *back;
+	t_s *frwd;
+	int index;
 
-	*dir = 0;
-	tmp = start;
-	if (tmp)
-		tmpval = tmp->val;
-	biggest = tmp->val;
-	tmp = tmp->n;
-	while (tmp && !tmp->start)
+	index = 0;
+	back = start;
+	frwd = start;
+	while (back->val < median && frwd->val < median)
 	{
-		if (tmp->val > median)
-		{
-			biggest = tmp->val;
-		}
-		tmp = tmp->n;
+		if (back->val > median)
+			return (-index);
+		else if (frwd->val > median)
+			return (index);
+		back = back->p;
+		frwd = frwd->n;
+		index++;
 	}
-	tmp = start;
-	while (tmp && tmp->val != biggest)
-	{
-		tmp = tmp->n;
-		*dir += 1;
-	}
-	*dir = l(start) - *dir > *dir ? *dir : -(ft_abs(l(start) - *dir));
-	return (biggest);
+	return (index);
 }
 
 int	test_doubles(t_s *list)
@@ -129,7 +121,7 @@ int	test_doubles(t_s *list)
 		if (list->end)
 			break ;
 		next = next->n;
-	   	list = next;	
+		list = next;	
 	}
 	return (ret);
 }
@@ -176,10 +168,10 @@ int	is_ordered(t_s *list)
 		{
 			tmp = tmp->n;
 		}
-			if (tmp->end)
-			{
-				return (1);
-			}
+		if (tmp->end)
+		{
+			return (1);
+		}
 	}
 	return (0);
 

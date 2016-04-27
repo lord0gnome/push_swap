@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 17:17:48 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/27 17:48:33 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,8 @@ int	l(t_s *s)
 	}
 	return (count);
 }
-
+/*
 int	get_median_in_scope(t_s *list, int scope)
 {
 	int	i;
-}
+}*/

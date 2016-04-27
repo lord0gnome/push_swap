@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/26 16:35:16 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/27 16:09:22 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,16 @@ typedef struct	s_s
 
 typedef struct		s_action
 {
-	int				action; // 1 == pb, 2 == pa, 3 == ra, 4 == rra, 5 == rb, 6 == rrb 7 == sa, 8 == sb
+	char			action; // 1 == pb, 2 == pa, 3 == ra, 4 == rra, 5 == rb, 6 == rrb 7 == sa, 8 == sb
 	struct s_action	*next;
+	struct s_action	*prev;
 }					t_action;
 
 
+t_action	*new_a_list(char action);
+t_action	*add_a_to_list(t_action *last, char action);
+t_action	*destroy_a(t_action *todest);
+void		print_actions(t_action *start);
 t_s	*add_to_start(int value, t_s *begin);
 int	get_smallest(t_s *start, int *dir);
 int	get_biggest(t_s *start, int *dir);
@@ -59,7 +64,7 @@ t_s	*rra(t_s *a);
 t_s	*pb(t_s *a, t_s **b);
 t_s	*pa(t_s **a, t_s *b);
 t_s *destroy(t_s **todestroy);
-void	print_lists(t_s *a, t_s *b, double time, char *string);
+void	print_lists(t_s *a, t_s *b, double time, t_action *acts);
 int		get_median(int *tab, unsigned int tab_len);
 int		get_greater_than_median(t_s *start, int median);
 

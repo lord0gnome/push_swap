@@ -6,13 +6,13 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 17:01:35 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/19 14:11:43 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/27 16:10:52 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_lists(t_s *a, t_s *b, double time, char *string)
+void	print_lists(t_s *a, t_s *b, double time, t_action *acts)
 {
 	wchar_t	up;
 	wchar_t	down;
@@ -40,8 +40,7 @@ void	print_lists(t_s *a, t_s *b, double time, char *string)
 		a = a->n;
 		ft_putchar('\n');
 	}
-	ft_putstr("\n");
-	ft_putstr("\n");
+	ft_putstr("\n\n");
 	while ((b))
 	{
 
@@ -63,6 +62,7 @@ void	print_lists(t_s *a, t_s *b, double time, char *string)
 		b = b->n;
 		ft_putchar('\n');
 	}
+	ft_putstr("\n\n");
 	/*
 
 	   ft_putnbr(b->val);
@@ -77,7 +77,7 @@ void	print_lists(t_s *a, t_s *b, double time, char *string)
 	   ft_putchar('\n');
 	   }*/
 ft_putstr(KCYN);
-ft_putstr(string);
+print_actions(acts);
 ft_putstr(RESET);
 ft_wait(time);
 }

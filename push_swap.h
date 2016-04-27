@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 16:09:22 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/27 19:40:15 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ t_s *destroy(t_s **todestroy);
 void	print_lists(t_s *a, t_s *b, double time, t_action *acts);
 int		get_median(int *tab, unsigned int tab_len);
 int		get_greater_than_median(t_s *start, int median);
+int		get_median_in_scope(t_s *start, t_s *end);
 
 #endif

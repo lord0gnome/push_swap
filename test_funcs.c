@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 17:48:33 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/27 19:40:12 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,57 @@ int	l(t_s *s)
 	}
 	return (count);
 }
-/*
-int	get_median_in_scope(t_s *list, int scope)
+
+int	get_median_in_scope(t_s *start, t_s *end)
 {
-	int	i;
-}*/
+	int	median;
+	t_s	*temp;
+	t_s *begin;
+	int	biggerthan;
+	int	smallerthan;
+	int	bestdiff;
+	int	currdiff;
+
+	temp = start->n;
+	begin = start;
+	bestdiff = 93459345;
+	while (start != end)
+	{
+		biggerthan = 0;
+		smallerthan = 0;
+		while (temp != begin)
+		{
+			ft_wait(10);
+			if (start->val > temp->val)
+				biggerthan++;
+			if (start->val < temp->val)
+				smallerthan++;
+			ft_printf("<<comparing [%d] and [%d]  __  ", start->val, temp->val);
+			ft_printf("smallerthan[%d] biggerthan[%d]\n", smallerthan, biggerthan);
+			temp = temp->p;
+		}
+		temp = start->n;
+		while (temp != end->n)
+		{
+			ft_wait(10);
+			if (start->val > temp->val)
+				biggerthan++;
+			if (start->val < temp->val)
+				smallerthan++;
+			ft_printf(">>comparing [%d] and [%d]  __  ", start->val, temp->val);
+			ft_printf("smallerthan[%d] biggerthan[%d]\n", smallerthan, biggerthan);
+			temp = temp->n;
+		}
+		currdiff = ft_abs(smallerthan - biggerthan);
+		if (bestdiff == 93459345)
+		{
+			median = start->val;
+			bestdiff = currdiff;
+		}
+		median = currdiff < bestdiff ? start->val : median;
+		start = start->n;
+		temp = start->n;
+
+	}
+	return (median);
+}

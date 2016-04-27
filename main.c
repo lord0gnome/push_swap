@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 16:53:58 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/27 19:40:14 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		main(int argc, char **argv)
 			if (n < 0)
 				while (n++ != 0)
 				{
-					print_lists(a, b, time, acts);
+			//		print_lists(a, b, time, acts);
 					acts = add_a_to_list(acts, 4);
 					a = rra(a);
 					nops++;
@@ -63,12 +63,12 @@ int		main(int argc, char **argv)
 			else
 				while (n-- != 0)
 				{
-					print_lists(a, b, time, acts);
+			//		print_lists(a, b, time, acts);
 					acts = add_a_to_list(acts, 3);
 					a = ra(a);
 					nops++;
 				}	
-			print_lists(a, b, time, acts);
+		//	print_lists(a, b, time, acts);
 			break ;
 		}
 		sml = get_smallest(a, &dir);
@@ -76,7 +76,7 @@ int		main(int argc, char **argv)
 		{
 			while (a && a->val != sml)
 			{
-				print_lists(a, b, time, acts);
+			//	print_lists(a, b, time, acts);
 				acts = add_a_to_list(acts, 4);
 				a = rra(a);
 				nops++;
@@ -86,7 +86,7 @@ int		main(int argc, char **argv)
 		{
 			while (a && a->val != sml)
 			{
-				print_lists(a, b, time, acts);
+		//		print_lists(a, b, time, acts);
 				acts = add_a_to_list(acts, 3);
 				a = ra(a);
 				nops++;
@@ -98,7 +98,7 @@ int		main(int argc, char **argv)
 			acts = add_a_to_list(acts, 1);
 			a = pb(a, &b);
 			nops++;
-			print_lists(a, b, time, acts);
+	//		print_lists(a, b, time, acts);
 		}
 		if (!a || is_ordered(a))
 			break;
@@ -108,10 +108,11 @@ int		main(int argc, char **argv)
 		acts = add_a_to_list(acts, 2);
 		b = pa(&a, b);
 		nops++;
-		print_lists(a, b, time, acts);
+	//	print_lists(a, b, time, acts);
 	}
 	print_lists(a, b, time, acts);
 	ft_printf("\n\nnumber of operations : %d\n\n", nops);
+	ft_printf("\nmedian of list %d", get_median_in_scope(a, a->p));
 	//if ((is_sorted_final(&a, b.currentsize)) == 1)
 	return (0);
 }

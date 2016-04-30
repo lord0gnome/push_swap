@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 19:40:12 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/30 20:22:31 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	get_biggest(t_s *start, int *dir)
 	return (biggest);
 }
 
-int	get_greater_than_median(t_s *start, int median)
+int	get_smaller_or_median(t_s *start, int median, int *stop)
 {
 	t_s *back;
 	t_s *frwd;
@@ -77,15 +77,20 @@ int	get_greater_than_median(t_s *start, int median)
 	index = 0;
 	back = start;
 	frwd = start;
-	while (back->val < median && frwd->val < median)
+	while (back && start && back->val > median && frwd->val > median)
 	{
-		if (back->val > median)
-			return (-index);
-		else if (frwd->val > median)
-			return (index);
 		back = back->p;
 		frwd = frwd->n;
 		index++;
+		if (back->val <= median)
+			return (-index);
+		else if (frwd->val <= median)
+			return (index);
+		if (back == start || frwd == start)
+		{
+			*stop = 1;
+			return (0);
+		}
 	}
 	return (index);
 }
@@ -195,58 +200,4 @@ int	l(t_s *s)
 		count++;
 	}
 	return (count);
-}
-
-int	get_median_in_scope(t_s *start, t_s *end)
-{
-	int	median;
-	t_s	*temp;
-	t_s *begin;
-	int	biggerthan;
-	int	smallerthan;
-	int	bestdiff;
-	int	currdiff;
-
-	temp = start->n;
-	begin = start;
-	bestdiff = 93459345;
-	while (start != end)
-	{
-		biggerthan = 0;
-		smallerthan = 0;
-		while (temp != begin)
-		{
-			ft_wait(10);
-			if (start->val > temp->val)
-				biggerthan++;
-			if (start->val < temp->val)
-				smallerthan++;
-			ft_printf("<<comparing [%d] and [%d]  __  ", start->val, temp->val);
-			ft_printf("smallerthan[%d] biggerthan[%d]\n", smallerthan, biggerthan);
-			temp = temp->p;
-		}
-		temp = start->n;
-		while (temp != end->n)
-		{
-			ft_wait(10);
-			if (start->val > temp->val)
-				biggerthan++;
-			if (start->val < temp->val)
-				smallerthan++;
-			ft_printf(">>comparing [%d] and [%d]  __  ", start->val, temp->val);
-			ft_printf("smallerthan[%d] biggerthan[%d]\n", smallerthan, biggerthan);
-			temp = temp->n;
-		}
-		currdiff = ft_abs(smallerthan - biggerthan);
-		if (bestdiff == 93459345)
-		{
-			median = start->val;
-			bestdiff = currdiff;
-		}
-		median = currdiff < bestdiff ? start->val : median;
-		start = start->n;
-		temp = start->n;
-
-	}
-	return (median);
 }

@@ -6,12 +6,12 @@
 #    By: guiricha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 16:55:06 by guiricha          #+#    #+#              #
-#    Updated: 2016/04/27 16:03:20 by guiricha         ###   ########.fr        #
+#    Updated: 2016/04/30 19:58:29 by guiricha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_NAME = main.c linked_lists.c test_funcs.c print_funcs.c get_median.c \
-		   linked_lists_actions.c
+		   linked_lists_actions.c apply_actions.c quicksort.c
 
 NAME = push_swap
 CC = gcc

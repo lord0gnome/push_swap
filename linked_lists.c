@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 10:52:06 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/17 11:27:50 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/30 16:24:10 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_s	*add_to_start(int value, t_s *begin)
 		begin->p = new;
 	}
 	else
-		return (NULL);
+		return (create_list(value));
 	return (new);
 }
 
@@ -176,6 +176,28 @@ t_s	*rra(t_s *a)
 	else
 		return (a);
 }
+t_s	*rrb(t_s *b)
+{
+	if (b && b->end && b->start)
+	{
+		return (b);
+	}
+	if (b)
+	{
+		if (b->p)
+		{
+			b->start = 0;
+			b->p->start = 1;
+			b->p->end = 0;
+			b->p->p->end = 1;
+			return (b->p);
+		}
+		return (b);
+	}
+	else
+		return (b);
+}
+
 
 t_s *destroy(t_s **todestroy)
 {

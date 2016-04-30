@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 12:48:47 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 16:31:35 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/30 18:41:04 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,42 @@ t_action	*add_a_to_list(t_action *last, char action)
 
 t_action *destroy_a(t_action *todest)
 {
+	t_action *temp;
+
+	temp = NULL;
 	if (todest && todest->next && todest->prev)
 	{
-		todest->next->prev = todest->prev;
-		todest->prev->next = todest->next;
-		free(todest);
-		todest = NULL;
+		todest = todest->prev;
+		todest->next->next->prev = todest;
+		temp = todest->next->next;
+		free(todest->next);
+		todest->next = temp;
 	}
 	else if (todest && todest->next)
 	{
-		todest->next->prev = NULL;
-		free(todest);
-		todest = NULL;
+		todest = todest->next;
+		free(todest->prev);
+		todest->prev = NULL;
 	}
 	else if (todest && todest->prev)
 	{
-		todest->prev->next = NULL;
+		todest = todest->prev;
+		free(todest->next);
+		todest->next = NULL;
+	}
+	else if (todest)
+	{
 		free(todest);
 		todest = NULL;
 	}
 	return (todest);
 }
 
-void	print_actions(t_action *start)
+void	print_actions(t_action *list)
 {	
+	t_action *start;
+
+	start = list;
 	while (start && start->prev)
 		start = start->prev;
 	while (start)
@@ -106,4 +118,28 @@ void	print_actions(t_action *start)
 			ft_putstr(RESET);
 		start = start->next;
 	}
+}
+
+t_action	*destroy_useless(t_action *list, int *nops)
+{
+	while (list && list->prev)
+		list = list->prev;
+	while (list && list->next)
+	{
+		if (list->next && ((list->action == 1 && list->next->action == 2) ||
+			(list->action == 2 && list->next->action == 1) ||
+			(list->action == 3 && list->next->action == 4) ||
+			(list->action == 4 && list->next->action == 3) ||
+			((list->action == 5 && list->next->action == 6) ||
+			(list->action == 6 && list->next->action == 5))))
+		{
+			list = destroy_a(list);
+			if (list)
+				list = destroy_a(list);
+			*nops -= 2;
+		}
+		if (list && list->next)
+			list = list->next;
+	}
+	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/27 19:40:15 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/04/30 20:04:26 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_action
 t_action	*new_a_list(char action);
 t_action	*add_a_to_list(t_action *last, char action);
 t_action	*destroy_a(t_action *todest);
-void		print_actions(t_action *start);
+void		print_actions(t_action *list);
 t_s	*add_to_start(int value, t_s *begin);
 int	get_smallest(t_s *start, int *dir);
 int	get_biggest(t_s *start, int *dir);
@@ -60,13 +60,16 @@ t_s	*sa(t_s *a);
 t_s	*sb(t_s *b);
 t_s	*ra(t_s *a);
 t_s	*rb(t_s *b);
+t_s	*rrb(t_s *b);
 t_s	*rra(t_s *a);
 t_s	*pb(t_s *a, t_s **b);
 t_s	*pa(t_s **a, t_s *b);
 t_s *destroy(t_s **todestroy);
 void	print_lists(t_s *a, t_s *b, double time, t_action *acts);
 int		get_median(int *tab, unsigned int tab_len);
-int		get_greater_than_median(t_s *start, int median);
-int		get_median_in_scope(t_s *start, t_s *end);
+int		get_smaller_or_median(t_s *start, int median, int *stop);
+t_action	*destroy_useless(t_action *list, int *nops);
+void	apply_actions(t_s *a, t_s *b, t_action **list, double time);
+t_s	*quick_sort_main(t_s *a, t_s **b, int *tab, int tab_len);
 
 #endif

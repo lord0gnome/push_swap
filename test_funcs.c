@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/30 20:22:31 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/01 19:09:29 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,27 +106,20 @@ int	test_doubles(t_s *list)
 	ret = 1;
 	totallen = l(list);
 	tlbck = totallen;
-	current = list->val;
 	next = list;
-	while(list)
+	while (!list->n->start)
 	{
 		totallen = tlbck;
 		current = list->val;
 		while (totallen)
 		{
 			if (list && list->val == current && totallen != tlbck)
-			{
 				ret--;
-				break ;
-			}
 			list = list->n;
 			totallen--;
 		}
-		ft_putchar('\n');
-		if (list->end)
-			break ;
 		next = next->n;
-		list = next;	
+		list = next;
 	}
 	return (ret);
 }
@@ -179,7 +172,6 @@ int	is_ordered(t_s *list)
 		}
 	}
 	return (0);
-
 }
 
 int	l(t_s *s)

@@ -6,126 +6,98 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/30 20:35:15 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/01 19:07:19 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <unistd.h>
 
-int		main(int argc, char **argv)
+static t_main	*init_init(void)
 {
-	t_s		*a;
-	t_s 	*b;
-	t_s		*abck;
+	t_main	*init;
+
+	if ((init = (t_main *)malloc(sizeof(t_main))) == NULL)
+		return (NULL);
+	init->int_test = 0;
+	init->time = 0;
+	init->n_ops = 0;
+	init->n = 0;
+	init->dir = 0;
+	init->sml = 0;
+	init->color = 0;
+	init->draw = 0;
+	init->arg = 0;
+	return (init);
+}
+
+static void		do_args(t_main *init, char **argv)
+{
+	if (argv[1][0] == '-')
+	{
+		while (argv[1][init->n])
+		{
+			if (argv[1][init->n] == 'h')
+			{
+				ft_putstr("available commands\n -c : Draw in color the list ");
+				ft_putstr("of actions\n -tNBR : slow by NBR time\n ");
+				ft_putstr("-v : Draw all sequenced actions\n");
+			}
+			if (argv[1][init->n] == 'c')
+				init->color = 1;
+			else if (argv[1][init->n] == 'v')
+				init->draw = 1;
+			else if (argv[1][init->n] == 't')
+			{
+				init->time = ft_atoi(argv[1] + (init->n + 1));
+				init->n += ft_nbrlen(init->time);
+			}
+			init->n++;
+		}
+		init->arg = 1;
+	}
+}
+
+static void		do_init(int argc, char **argv, t_s **a, t_main **init)
+{
+	*init = init_init();
+	while (argc - (*init)->arg > 1)
+	{
+		do_args(*init, argv);
+		if (argc == 2 && (*init)->arg)
+			(*init)->arg = -1;
+		(*init)->int_test = ft_atoll(argv[argc - 1]);
+		if ((*init)->int_test > 2147483647 || (*init)->int_test < -2147483648)
+			(*init)->arg = -1;
+		*a = add_to_start(ft_atoi(argv[argc - 1]), *a);
+		argc--;
+	}
+}
+
+int				main(int argc, char **argv)
+{
+	t_s			*a;
+	t_s			*b;
 	t_action	*acts;
 	t_action	**start;
-	long long test;
-	int		*tab;
-	int		tab_len;
-	int y;
-	double time;
-	int	nops;
-//	int n;
-//	int dir;
-//	int sml;
+	t_main		*init;
 
 	acts = NULL;
 	start = &acts;
 	b = NULL;
 	a = NULL;
-	if (argc > 1)
-		tab = (int *)malloc(sizeof(int) * argc - 1);
-	else
-		tab = NULL;
-	tab_len = argc - 1;
-	while (argc > 1)
-	{
-		test = ft_atoll(argv[argc - 1]);
-		if (test > 2147483647 || test < -2147483648)
-			return (0);
-		tab[argc - 1] = (ft_atoi(argv[argc - 1]));
-		a = add_to_start(ft_atoi(argv[argc - 1]), a);
-		abck = add_to_start(ft_atoi(argv[argc - 1]), abck);
-		argc--;
-	}
-	nops = 0;
-	time = 9;
-	y = test_doubles(a);
-	if (y != 1)
+	do_init(argc, argv, &a, &init);
+	if (init->arg == -1)
+		return (-1);
+	init->n = 0;
+	init->n_ops = test_doubles(a);
+	if (init->n_ops != 1)
 		return (0);
-	ft_sort_tab(tab, tab_len);
-/*	while (42)
-	{
-		if ((n = (is_pseudo_ordered(a))) != 0 && !b)
-		{
-			if (n < 0)
-				while (n++ != 0)
-				{
-					print_lists(a, b, time, acts);
-					acts = add_a_to_list(acts, 4);
-					a = rra(a);
-					nops++;
-				}
-			else
-				while (n-- != 0)
-				{
-					print_lists(a, b, time, acts);
-					acts = add_a_to_list(acts, 3);
-					a = ra(a);
-					nops++;
-				}	
-			print_lists(a, b, time, acts);
-			break ;
-		}
-		sml = get_smallest(a, &dir);
-		if (dir < 0)
-		{
-			while (a && a->val != sml)
-			{
-				print_lists(a, b, time, acts);
-				acts = add_a_to_list(acts, 4);
-				a = rra(a);
-				nops++;
-			}
-		}
-		else if (dir > 0)
-		{
-			while (a && a->val != sml)
-			{
-				print_lists(a, b, time, acts);
-				acts = add_a_to_list(acts, 3);
-				a = ra(a);
-				nops++;
-			}
-		}
-		print_lists(a, b, time, acts);
-		if (a->val == sml && !is_ordered(a))
-		{
-			acts = add_a_to_list(acts, 1);
-			a = pb(a, &b);
-			nops++;
-			print_lists(a, b, time, acts);
-		}
-		if (!a || is_ordered(a))
-			break;
-	}
-	while (b)
-	{
-		acts = add_a_to_list(acts, 2);
-		b = pa(&a, b);
-		nops++;
-		print_lists(a, b, time, acts);
-	}*/
-	a = quick_sort_main(a, &b, tab, tab_len);
-	print_lists(a, b, time, acts);
-	ft_printf("\n\nnumber of operations : %d\n", nops);
-	//acts = destroy_useless(acts, &nops);
-	ft_wait(50);
-	//apply_actions(abck, b, &acts, time);
-	//print_actions(acts);
-	ft_printf("\n\nnumber of operations after trim : %d\n", nops);
-	ft_printf("median of list %d", get_median(tab, tab_len));
-	//if ((is_sorted_final(&a, b.currentsize)) == 1)
+	init->n_ops = 0;
+	do_algo(&a, &b, init, &acts);
+	acts = destroy_useless(acts, &(init->n_ops));
+	print_lists(a, b, init, acts);
+	if (init->draw == 0)
+		print_actions(acts, init);
 	return (0);
 }

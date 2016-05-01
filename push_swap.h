@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/30 20:04:26 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/01 16:54:07 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@
 # define KWHT  "\x1B[37m"
 # define RESET "\033[0m"
 
+typedef struct	s_main
+{
+	int			int_test;
+	double		time;
+	int			n_ops;
+	int			n;
+	int			dir;
+	int			sml;
+	int			color;
+	int			draw;
+	int			arg;
+}				t_main;
 
 typedef struct	s_s
 {
@@ -38,7 +50,7 @@ typedef struct	s_s
 
 typedef struct		s_action
 {
-	char			action; // 1 == pb, 2 == pa, 3 == ra, 4 == rra, 5 == rb, 6 == rrb 7 == sa, 8 == sb
+	char			action;
 	struct s_action	*next;
 	struct s_action	*prev;
 }					t_action;
@@ -47,7 +59,7 @@ typedef struct		s_action
 t_action	*new_a_list(char action);
 t_action	*add_a_to_list(t_action *last, char action);
 t_action	*destroy_a(t_action *todest);
-void		print_actions(t_action *list);
+void		print_actions(t_action *list, t_main *init);
 t_s	*add_to_start(int value, t_s *begin);
 int	get_smallest(t_s *start, int *dir);
 int	get_biggest(t_s *start, int *dir);
@@ -65,11 +77,11 @@ t_s	*rra(t_s *a);
 t_s	*pb(t_s *a, t_s **b);
 t_s	*pa(t_s **a, t_s *b);
 t_s *destroy(t_s **todestroy);
-void	print_lists(t_s *a, t_s *b, double time, t_action *acts);
+void	print_lists(t_s *a, t_s *b, t_main *init, t_action *acts);
 int		get_median(int *tab, unsigned int tab_len);
 int		get_smaller_or_median(t_s *start, int median, int *stop);
 t_action	*destroy_useless(t_action *list, int *nops);
-void	apply_actions(t_s *a, t_s *b, t_action **list, double time);
-t_s	*quick_sort_main(t_s *a, t_s **b, int *tab, int tab_len);
+void	apply_actions(t_s *a, t_s *b, t_action **list);
+void	do_algo(t_s **a, t_s **b, t_main *init, t_action **acts);
 
 #endif

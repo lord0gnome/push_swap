@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 10:52:06 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/30 16:24:10 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/01 19:09:09 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ t_s	*sb(t_s *b)
 	return (b);
 }
 
-
-t_s *pb(t_s *a, t_s **b)
+t_s	*pb(t_s *a, t_s **b)
 {
 	if (a && *b == NULL)
 	{
@@ -95,7 +94,7 @@ t_s *pb(t_s *a, t_s **b)
 	return (a);
 }
 
-t_s *pa(t_s **a, t_s *b)
+t_s	*pa(t_s **a, t_s *b)
 {
 	if (b && *a == NULL)
 	{
@@ -154,7 +153,6 @@ t_s	*rb(t_s *b)
 		return (b);
 }
 
-
 t_s	*rra(t_s *a)
 {
 	if (a && a->end && a->start)
@@ -176,6 +174,7 @@ t_s	*rra(t_s *a)
 	else
 		return (a);
 }
+
 t_s	*rrb(t_s *b)
 {
 	if (b && b->end && b->start)
@@ -198,8 +197,7 @@ t_s	*rrb(t_s *b)
 		return (b);
 }
 
-
-t_s *destroy(t_s **todestroy)
+t_s	*destroy(t_s **todestroy)
 {
 	t_s	*tmp;
 
@@ -218,5 +216,5 @@ t_s *destroy(t_s **todestroy)
 		free(*todestroy);
 		return (tmp);
 	}
-return (*todestroy);
+	return (*todestroy);
 }

@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 12:48:47 by guiricha          #+#    #+#             */
-/*   Updated: 2016/04/30 18:41:04 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/01 19:05:56 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ t_action	*new_a_list(char action)
 
 t_action	*add_a_to_list(t_action *last, char action)
 {
+	t_action	*new;
+
 	if (last)
 	{
-		t_action	*new;
-
 		if (!(new = (t_action *)malloc(sizeof(t_action))))
 			return (NULL);
 		new->action = action;
@@ -42,7 +42,13 @@ t_action	*add_a_to_list(t_action *last, char action)
 		return (new_a_list(action));
 }
 
-t_action *destroy_a(t_action *todest)
+static void	free_null_a(t_action **todest)
+{
+	free(*todest);
+	*todest = NULL;
+}
+
+t_action	*destroy_a(t_action *todest)
 {
 	t_action *temp;
 
@@ -64,56 +70,58 @@ t_action *destroy_a(t_action *todest)
 	else if (todest && todest->prev)
 	{
 		todest = todest->prev;
-		free(todest->next);
-		todest->next = NULL;
+		free_null_a(&(todest->next));
 	}
 	else if (todest)
-	{
-		free(todest);
-		todest = NULL;
-	}
+		free_null_a(&todest);
 	return (todest);
 }
 
-void	print_actions(t_action *list)
-{	
+static void	print_act_cnt(t_action *start)
+{
+	if (start->action == 3)
+		ft_putstr("RA");
+	else if (start->action == 4)
+		ft_putstr("RRA");
+	else if (start->action == 5)
+		ft_putstr("RB");
+	else if (start->action == 6)
+		ft_putstr("RRB");
+	else if (start->action == 7)
+		ft_putstr("SA");
+	else if (start->action == 8)
+		ft_putstr("SB");
+	else if (start->action == 9)
+		ft_putstr("RR");
+	else if (start->action == 10)
+		ft_putstr("RRR");
+	else if (start->action == 11)
+		ft_putstr("SS");
+}
+
+void		print_actions(t_action *list, t_main *init)
+{
 	t_action *start;
 
 	start = list;
 	while (start && start->prev)
 		start = start->prev;
+	ft_putstr(RESET);
 	while (start)
 	{
-		if (start && !start->next)
+		if (start && !start->next && init->color)
 			ft_putstr(KRED);
-		else if (start && !start->prev)
+		else if (start && !start->prev && init->color)
 			ft_putstr(KGRN);
-		else
+		else if (init->color)
 			ft_putstr(KCYN);
 		if (start->action == 1)
 			ft_putstr("PB");
 		else if (start->action == 2)
 			ft_putstr("PA");
-		else if (start->action == 3)
-			ft_putstr("RA");
-		else if (start->action == 4)
-			ft_putstr("RRA");
-		else if (start->action == 5)
-			ft_putstr("RB");
-		else if (start->action == 6)
-			ft_putstr("RRB");
-		else if (start->action == 7)
-			ft_putstr("SA");
-		else if (start->action == 8)
-			ft_putstr("SB");
-		else if (start->action == 9)
-			ft_putstr("RR");
-		else if (start->action == 10)
-			ft_putstr("RRR");
-		else if (start->action == 11)
-			ft_putstr("SS");
+		print_act_cnt(start);
 		if (start->next)
-			ft_putstr(KMAG"_"RESET);
+			ft_putstr(" ");
 		if (!start->prev)
 			ft_putstr(RESET);
 		start = start->next;
@@ -127,11 +135,11 @@ t_action	*destroy_useless(t_action *list, int *nops)
 	while (list && list->next)
 	{
 		if (list->next && ((list->action == 1 && list->next->action == 2) ||
-			(list->action == 2 && list->next->action == 1) ||
-			(list->action == 3 && list->next->action == 4) ||
-			(list->action == 4 && list->next->action == 3) ||
-			((list->action == 5 && list->next->action == 6) ||
-			(list->action == 6 && list->next->action == 5))))
+					(list->action == 2 && list->next->action == 1) ||
+					(list->action == 3 && list->next->action == 4) ||
+					(list->action == 4 && list->next->action == 3) ||
+					((list->action == 5 && list->next->action == 6) ||
+					(list->action == 6 && list->next->action == 5))))
 		{
 			list = destroy_a(list);
 			if (list)

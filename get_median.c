@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 14:16:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 15:57:51 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 16:04:07 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 int	get_median(int *tab, unsigned int tab_len)
 {
 	int				median;
-	unsigned int	index;
 
-	index = 0;
 	if (!tab_len)
 		return (tab[0]);
-	while (index <= tab_len / 2)
-		median = tab[index++];
+		median = tab[tab_len / 2];
 	return (median);
 }

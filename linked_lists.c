@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 10:52:06 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 19:09:09 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 17:59:42 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,4 +217,56 @@ t_s	*destroy(t_s **todestroy)
 		return (tmp);
 	}
 	return (*todestroy);
+}
+
+void		modify_stack2(t_s **a, t_s **b, t_action **acts, t_main *init)
+{
+	if (init->action == 5)
+	{
+		*b = rb(*b);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	else if (init->action == 6)
+	{
+		*b = rrb(*b);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	else if (init->action == 7)
+	{
+		*a = sa(*a);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	else if (init->action == 8)
+	{
+		*b = sb(*b);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+}
+
+t_action	*modify_stack(t_s **a, t_s **b, t_action **acts, t_main *init)
+{
+	print_lists(*a, *b, init, *acts);
+	if (init->action == 1)
+	{
+		*a = pb(*a, b);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	else if (init->action == 2)
+	{
+		*b = pa(a, *b);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	else if (init->action == 3)
+	{
+		*a = ra(*a);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	else if (init->action == 4)
+	{
+		*a = rra(*a);
+		*acts = add_a_to_list(*acts, init->action);
+	}
+	modify_stack2(a, b, acts, init);
+	print_lists(*a, *b, init, *acts);
+	return (*acts);
 }

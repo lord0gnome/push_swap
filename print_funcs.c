@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 17:01:35 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 18:58:21 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 18:18:17 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		print_lists(t_s *a, t_s *b, t_main *init, t_action *acts)
 	ft_putstr("\n\n");
 	ft_putstr(KCYN);
 	ft_putchar('\n');
-	print_actions(acts, init);
+	print_actions(&acts, init);
 	ft_putstr(RESET);
 	ft_wait(init->time);
 }

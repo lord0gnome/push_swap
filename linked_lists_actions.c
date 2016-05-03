@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 12:48:47 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 19:05:56 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 18:24:21 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,23 @@ t_action	*new_a_list(char action)
 	return (first);
 }
 
-t_action	*add_a_to_list(t_action *last, char action)
+t_action	*add_a_to_list(t_action *start, char action)
 {
 	t_action	*new;
+	t_action	*first;
 
-	if (last)
+	first = start;
+	if (first)
 	{
+		while (first->next)
+			first = first->next;
 		if (!(new = (t_action *)malloc(sizeof(t_action))))
 			return (NULL);
 		new->action = action;
-		last->next = new;
+		first->next = new;
 		new->next = NULL;
-		new->prev = last;
-		return (new);
+		new->prev = first;
+		return (first);
 	}
 	else
 		return (new_a_list(action));
@@ -99,13 +103,13 @@ static void	print_act_cnt(t_action *start)
 		ft_putstr("SS");
 }
 
-void		print_actions(t_action *list, t_main *init)
+void		print_actions(t_action **list, t_main *init)
 {
 	t_action *start;
 
-	start = list;
-	while (start && start->prev)
-		start = start->prev;
+	while ((*list) && (*list)->prev)
+			(*list) = (*list)->prev;
+	start = *list;
 	ft_putstr(RESET);
 	while (start)
 	{
@@ -126,12 +130,11 @@ void		print_actions(t_action *list, t_main *init)
 			ft_putstr(RESET);
 		start = start->next;
 	}
+	ft_printf("current length of operations : %d", init->nopsins);
 }
 
 t_action	*destroy_useless(t_action *list, int *nops)
 {
-	while (list && list->prev)
-		list = list->prev;
 	while (list && list->next)
 	{
 		if (list->next && ((list->action == 1 && list->next->action == 2) ||

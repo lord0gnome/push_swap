@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:37:26 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 19:07:19 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 18:24:17 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static t_main	*init_init(void)
 	init->color = 0;
 	init->draw = 0;
 	init->arg = 0;
+	init->nopsbub = 0;
+	init->nopsins = 0;
+	init->abck = NULL;
 	return (init);
 }
 
@@ -70,6 +73,7 @@ static void		do_init(int argc, char **argv, t_s **a, t_main **init)
 		if ((*init)->int_test > 2147483647 || (*init)->int_test < -2147483648)
 			(*init)->arg = -1;
 		*a = add_to_start(ft_atoi(argv[argc - 1]), *a);
+		(*init)->abck = add_to_start(ft_atoi(argv[argc - 1]), (*init)->abck);
 		argc--;
 	}
 }
@@ -79,11 +83,9 @@ int				main(int argc, char **argv)
 	t_s			*a;
 	t_s			*b;
 	t_action	*acts;
-	t_action	**start;
 	t_main		*init;
 
 	acts = NULL;
-	start = &acts;
 	b = NULL;
 	a = NULL;
 	do_init(argc, argv, &a, &init);
@@ -94,10 +96,11 @@ int				main(int argc, char **argv)
 	if (init->n_ops != 1)
 		return (0);
 	init->n_ops = 0;
-	do_algo(&a, &b, init, &acts);
-	acts = destroy_useless(acts, &(init->n_ops));
+	acts = do_algo(&a, &b, init, &acts);
 	print_lists(a, b, init, acts);
 	if (init->draw == 0)
-		print_actions(acts, init);
+		print_actions(&acts, init);
+	ft_putstr("\n");
+	ft_putnbr(init->nopsins);
 	return (0);
 }

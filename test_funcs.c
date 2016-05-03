@@ -6,11 +6,37 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 11:32:52 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 19:09:29 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 17:43:46 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	closest_swappable_pair(t_s *a)
+{
+	t_s *back;
+	t_s *frwd;
+	int	counter;
+
+	if (a->val > a->n->val)
+		return (1);
+	back = a->p;
+	frwd = a->n;
+	counter = 0;
+	while (back && frwd)
+	{
+		if (back == a || frwd == a)
+			break ;
+		counter++;
+		if (back->val < back->p->val)
+			return ((-counter) - 1);
+		if (frwd->val > frwd->n->val)
+		   return (counter + 1);	
+		back = back->p;
+		frwd = frwd->n;
+	}
+	return (counter);
+}
 
 int	get_smallest(t_s *start, int *dir)
 {
@@ -189,6 +215,26 @@ int	l(t_s *s)
 	while (s != adr)
 	{
 		s = s->n;
+		count++;
+	}
+	return (count);
+}
+
+int	l_action(t_action *s)
+{
+	int		count;
+
+	count = 0;
+	while (s && s->prev)
+		s = s->prev;
+	if (s)
+	{
+		s = s->next;
+		count++;
+	}
+	while (s != NULL)
+	{
+		s = s->next;
 		count++;
 	}
 	return (count);

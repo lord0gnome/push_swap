@@ -6,7 +6,7 @@
 /*   By: guiricha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:58:41 by guiricha          #+#    #+#             */
-/*   Updated: 2016/05/01 16:54:07 by guiricha         ###   ########.fr       */
+/*   Updated: 2016/05/03 18:24:22 by guiricha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 typedef struct	s_main
 {
+	char		action;
 	int			int_test;
 	double		time;
 	int			n_ops;
@@ -36,6 +37,9 @@ typedef struct	s_main
 	int			color;
 	int			draw;
 	int			arg;
+	int			nopsbub;
+	int			nopsins;
+	struct s_s	*abck;
 }				t_main;
 
 typedef struct	s_s
@@ -57,15 +61,16 @@ typedef struct		s_action
 
 
 t_action	*new_a_list(char action);
-t_action	*add_a_to_list(t_action *last, char action);
+t_action	*add_a_to_list(t_action *start, char action);
 t_action	*destroy_a(t_action *todest);
-void		print_actions(t_action *list, t_main *init);
+void		print_actions(t_action **list, t_main *init);
 t_s	*add_to_start(int value, t_s *begin);
 int	get_smallest(t_s *start, int *dir);
 int	get_biggest(t_s *start, int *dir);
 int	is_pseudo_ordered(t_s *list);
 int	is_ordered(t_s *list);
 int	l(t_s *s); //length of stack
+int	l_action(t_action *s);
 int	test_doubles(t_s *list);
 t_s	*create_list(int first);
 t_s	*sa(t_s *a);
@@ -82,6 +87,9 @@ int		get_median(int *tab, unsigned int tab_len);
 int		get_smaller_or_median(t_s *start, int median, int *stop);
 t_action	*destroy_useless(t_action *list, int *nops);
 void	apply_actions(t_s *a, t_s *b, t_action **list);
-void	do_algo(t_s **a, t_s **b, t_main *init, t_action **acts);
+t_action	*do_algo(t_s **a, t_s **b, t_main *init, t_action **acts);
+int		closest_swappable_pair(t_s *a);
+t_action	*modify_stack(t_s **a, t_s **b, t_action **acts, t_main *init);
+void		modify_stack2(t_s **a, t_s **b, t_action **acts, t_main *init);
 
 #endif

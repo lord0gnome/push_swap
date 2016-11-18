@@ -16,6 +16,7 @@
 # include <wchar.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 typedef struct			s_form
 {
@@ -84,17 +85,17 @@ typedef union			u_type
 	uintmax_t			uim;
 }						t_type;
 
-int						ft_printf(const char *restrict format, ...);
+int						ft_printf(const char *format, ...);
 int						do_va(va_list *now, t_data *d, t_type *var, t_form *i);
-int						read_until(const char *restrict f, char *r, t_data *d);
+int						read_until(const char *f, char *r, t_data *d);
 int						reinit_form(t_form **form);
 int						init_data(t_data **d);
-int						modify_f(t_form *c, const char *restrict f, t_data *d);
+int						modify_f(t_form *c, const char *f, t_data *d);
 int						isnum(char c);
 int						isvalid(char c);
 int						iscon(char c);
 int						binlen(int n);
-int						check_prec(const char *restrict format);
+int						check_prec(const char *format);
 char					*itoabase(long long n, int base, char caps);
 char					*itoabaseu(uintmax_t n, int base, char caps);
 char					*itoabasex(t_form *info, size_t n, int base, char caps);

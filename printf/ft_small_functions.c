@@ -21,7 +21,7 @@ static void	do_else(char *r, int i, t_data *d)
 	d->retplusreal += i;
 }
 
-int			read_until(const char *restrict f, char *r, t_data *d)
+int			read_until(const char *f, char *r, t_data *d)
 {
 	char	*bck;
 	int		i;

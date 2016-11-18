@@ -14,7 +14,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-static int	do_d_stuff(t_data *d, t_form **c, const char *restrict f, char *r)
+static int	do_d_stuff(t_data *d, t_form **c, const char *f, char *r)
 {
 	free(*c);
 	if (!(reinit_form(c)))
@@ -27,7 +27,7 @@ static int	do_d_stuff(t_data *d, t_form **c, const char *restrict f, char *r)
 	return (1);
 }
 
-int			ft_printf(const char *restrict format, ...)
+int			ft_printf(const char *format, ...)
 {
 	char	*result;
 	t_form	*c;

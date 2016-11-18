@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int			get_width_nd_prec(t_form *c, const char *restrict f, int i)
+int			get_width_nd_prec(t_form *c, const char *f, int i)
 {
 	if (f[i] == '.' && (!isvalid(f[i + 1]) || f[i + 1] == '0'))
 	{
@@ -37,7 +37,7 @@ int			get_width_nd_prec(t_form *c, const char *restrict f, int i)
 	return (i);
 }
 
-static void	modify_form2(int i, t_form *c, const char *restrict f)
+static void	modify_form2(int i, t_form *c, const char *f)
 {
 	if (f[i] == '+')
 	{
@@ -65,7 +65,7 @@ static void	modify_form2(int i, t_form *c, const char *restrict f)
 			c->type = (c->type != 3 && c->type < 5) ? 3 : 4;
 }
 
-static int	modify_form3(int i, t_form *c, const char *restrict f)
+static int	modify_form3(int i, t_form *c, const char *f)
 {
 	modify_form2(i, c, f);
 	if (f[i] == 'j')
@@ -77,7 +77,7 @@ static int	modify_form3(int i, t_form *c, const char *restrict f)
 	return (1);
 }
 
-static int	modify_form4(int *i, t_form *c, const char *restrict f)
+static int	modify_form4(int *i, t_form *c, const char *f)
 {
 	if (f[*i] == '.' && (!isnum(f[*i + 1]) || f[*i + 1] == '0'))
 		c->prec = 0;
@@ -89,7 +89,7 @@ static int	modify_form4(int *i, t_form *c, const char *restrict f)
 	return (1);
 }
 
-int			modify_f(t_form *c, const char *restrict f, t_data *d)
+int			modify_f(t_form *c, const char *f, t_data *d)
 {
 	int		i;
 

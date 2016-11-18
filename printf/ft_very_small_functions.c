@@ -27,7 +27,7 @@ int		isnum(char c)
 	return (c >= '0' && c <= '9' ? 1 : 0);
 }
 
-int		check_prec(const char *restrict format)
+int		check_prec(const char *format)
 {
 	int	i;
 

@@ -18,7 +18,6 @@ NAME = push_swap
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall
 OBJ_NAME = $(SRC_NAME:.c=.o)
-	FRAMEWORKS = -framework OpenGL -framework AppKit
 	STCS = libftprintf.a libft.a
 
 all: $(NAME)
@@ -47,7 +46,7 @@ $(NAME): $(LIB) $(OBJ_NAME)
 	@make re -C libft && cp -f libft/libft.a ./
 	@make re -C printf && cp -f printf/libftprintf.a ./
 	@echo "Making final $(NAME) executable"
-	@$(CC) -o $(NAME) $(OBJ_NAME) $(STCS) $(FRAMEWORKS)
+	@$(CC) -o $(NAME) $(OBJ_NAME) $(STCS)
 
 $(OBJ_NAME):
 	@$(CC) $(CFLAGS) -c $(SRC_NAME)

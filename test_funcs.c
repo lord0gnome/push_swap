@@ -42,12 +42,9 @@ int	get_smallest(t_s *start, int *dir)
 {
 	t_s	*tmp;
 	int	smallest;
-	int	tmpval;
 
 	*dir = 0;
 	tmp = start;
-	if (tmp)
-		tmpval = tmp->val;
 	smallest = tmp->val;
 	tmp = tmp->n;
 	while (tmp && !tmp->start)
@@ -70,12 +67,9 @@ int	get_biggest(t_s *start, int *dir)
 {
 	t_s	*tmp;
 	int	biggest;
-	int	tmpval;
 
 	*dir = 0;
 	tmp = start;
-	if (tmp)
-		tmpval = tmp->val;
 	biggest = tmp->val;
 	tmp = tmp->n;
 	while (tmp && !tmp->start)

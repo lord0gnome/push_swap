@@ -43,11 +43,9 @@ int	is_pseudo_ordered(t_s *list)
 
 int	is_ordered(t_s *list)
 {
-	int	tmpval;
 	t_s	*tmp;
 
 	tmp = list;
-	tmpval = tmp->val;
 	if (tmp && tmp->n == tmp)
 		return (1);
 	if (tmp && !tmp->end)
